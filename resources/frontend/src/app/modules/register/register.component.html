@@ -1,0 +1,100 @@
+<form>
+    <div class="row">
+        <div class="col-lg-8 offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Register</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name"
+                                    aria-describedby="firstname" placeholder="First Name">
+                                <small id="firstname" class="form-text text-muted">Required</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" class="form-control" name="lastname" id="lastname"
+                                    aria-describedby="lastname" placeholder="Last Name">
+                                <small id="lastname" class="form-text text-muted">Required</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    aria-describedby="email" placeholder="Email">
+                                <small id="email" class="form-text text-muted">Required</small>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="number" class="form-control" name="phone" id="phone"
+                                    aria-describedby="phone" placeholder="Phone">
+                                <small id="phone" class="form-text text-muted">Required</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" placeholder="Address" name="address" id="address"
+                                    rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="pincode">Pin Code</label>
+                                <input type="number" class="form-control" name="pincode" id="pincode"
+                                    aria-describedby="pincode" placeholder="Pin Code">
+                                <small id="pincode" class="form-text text-muted">Required</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                              <label for="password">Password</label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                              <label for="confirmpassword">Confirm Password</label>
+                              <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="d-flex justify-content-start align-items-center mt-3">
+                                <button type="submit" class="btn btn-primary">Register</button>
+
+                                <div class="ml-2">
+                                    <span>Click</span>
+                                    <a routerLink="/login" class="ml-1">here</a>
+                                    <span class="ml-1">to login</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
