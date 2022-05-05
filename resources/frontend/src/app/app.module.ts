@@ -8,6 +8,7 @@ import { LoginModule } from './modules/login/login.module';
 import { RegisterModule } from './modules/register/register.module';
 import { FindMechanicModule } from './modules/find-mechanic/find-mechanic.module';
 import { AddMechanicModule } from './modules/add-mechanic/add-mechanic.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AddMechanicModule } from './modules/add-mechanic/add-mechanic.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     LoginModule,
     RegisterModule,
     FindMechanicModule,

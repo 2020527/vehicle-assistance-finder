@@ -5,3 +5,7 @@
 
 /* Importing Datepicker SCSS file. */
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+.form-control.ng-touched.ng-invalid {
+    border: 1px solid #dc3545;
+}
