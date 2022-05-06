@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('visiting_charges');
             $table->string('experience_in');
             $table->string('image');
+            $table->unsignedInteger('created_by');
             $table->timestamps();
         });
     }

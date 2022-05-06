@@ -61,7 +61,7 @@ class UserAuthController extends Controller
 
 
     public function getUser(Request $request) {
-        $user = $request -> user();
+        $user = auth() -> guard('api') -> user();
 
         if (!$user) {
             return response('No User found, please try again', 401);

@@ -1,45 +1,48 @@
-<div class="row">
-    <div class="col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <form>
-                    <h5>Address Search</h5>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="" id="">
-                    </div>
-                    <button type="submit" class="btn btn-light">Search</button>
-                </form>
+<div class="d-block mt-3">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <h5>Address Search</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="" id="">
+                        </div>
+                        <button type="submit" class="btn btn-light">Search</button>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="card mt-3">
-            <div class="card-body">
-                <form>
-                    <h5>Pin Code Search</h5>
-                    <div class="form-group">
-                        <input type="number" class="form-control" name="" id="">
-                    </div>
-                    <button type="submit" class="btn btn-light">Search</button>
-                </form>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <form>
+                        <h5>Pin Code Search</h5>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="" id="">
+                        </div>
+                        <button type="submit" class="btn btn-light">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-8">
-        <div class="card mb-3" *ngFor="let item of [1,2,3,4,5]">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
+        <div class="col-lg-8">
+            <h5>Mechanics/Garages</h5>
+            <div class="card mb-3" *ngFor="let item of garages">
+                <div class="row no-gutters">
+                  <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="d-flex justify-content-center align-items-center align-self-center p-2">
+                        <img [src]="imageUrl + item.image" alt="...">
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ item?.title }}</h5>
+                      <p class="card-text">{{ item?.description }}</p>
+                      <p class="card-text"><small class="text-muted">Last updated {{ item?.created_at | date: 'dd MMMM yyyy hh:mm a' }}</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
 </div>

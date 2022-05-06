@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddMechanicComponent } from './add-mechanic.component';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -9,7 +12,10 @@ import { AddMechanicComponent } from './add-mechanic.component';
     AddMechanicComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ]
 })
 export class AddMechanicModule { }

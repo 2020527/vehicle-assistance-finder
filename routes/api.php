@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\UserAuthController;
-use App\Http\Controllers\MechanicsController;
+use App\Http\Controllers\GarageController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'mechanics'], function() {
-    Route::get('', [MechanicsController::class, 'index']);
-    Route::post('', [MechanicsController::class, 'store']);
+Route::group(['prefix' => 'garages'], function() {
+    Route::get('', [GarageController::class, 'index']);
+    Route::post('', [GarageController::class, 'store']);
+});
+
+Route::group(['prefix' => 'images'], function() {
+    Route::post('', [ImageController::class, 'store']);
 });
 
 Route::group(['prefix' => 'user'], function() {
     Route::post('/login', [UserAuthController::class, 'login']);
     Route::post('/register', [UserAuthController::class, 'register']);
+    Route::get('/current-user', [UserAuthController::class, 'getUser']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApplicationService } from 'src/app/services/application.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
   });
   constructor(
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private applicationService: ApplicationService
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class RegisterComponent implements OnInit {
         this.loading = '';
         this.alert.type = 'success';
         this.alert.msg = 'Successfully registered into the system!';
+        this.applicationService.setToken(response.token);
+        this.applicationService.currentUser$.next(response.data);
         setTimeout(() => {
           this.router.navigate(['/mechanics']);
         }, 2000);

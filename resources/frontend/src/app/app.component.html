@@ -1,20 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" routerLink="/mechanics">Vehicle Assistance Finder</a>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
+  <a class="navbar-brand font-weight-bold" routerLink="/mechanics">Vehicle Assistance Finder</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="applicationService.isAuthenticated()">
+        <a class="nav-link">My Requests</a>
+      </li>
+      <li class="nav-item" *ngIf="applicationService.isAuthenticated()">
+        <a class="nav-link" routerLink="/add-mechanic">Add New Mechanic</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item active" *ngIf="!applicationService.isAuthenticated()">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      <li class="nav-item" *ngIf="!applicationService.isAuthenticated()">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="user">
+        <a class="nav-link"><strong>{{ user?.firstName }} {{ user?.lastName }}</strong> ({{ user?.email }})</a>
+      </li>
+      <li class="nav-item" (click)="logout()" *ngIf="applicationService.isAuthenticated()">
+        <a class="nav-link pointer font-weight-bold">Logout</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
