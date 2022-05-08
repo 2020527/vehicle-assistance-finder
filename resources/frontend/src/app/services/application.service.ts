@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ApplicationService {
 
   public currentUser$: BehaviorSubject<any> = new BehaviorSubject(null);
+  public loading = false;
   constructor() { }
 
   isAuthenticated(): string {

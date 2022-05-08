@@ -1,0 +1,47 @@
+<form [formGroup]="form" (submit)="submit()">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Book An Appointment</h4>
+        <button type="button" class="btn-close close pull-right"
+            (click)="bookEmitter.emit(null); requestEmitter.emit(null)" aria-label="Close">
+            <span class="fa fa-close"></span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <small>You are requesting an appointment for <strong>{{ garageDetails?.title }}</strong></small>
+
+        <div class="form-group mt-3">
+            <label for="repair_for">Repair For</label>
+            <textarea class="form-control" name="repair_for" id="repair_for" rows="3" placeholder="Repair For"
+                formControlName="repair_for"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="requested_address">Requested Address</label>
+            <textarea class="form-control" name="requested_address" id="requested_address" rows="3"
+                placeholder="Requested Address" formControlName="requested_address"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="requested_pincode">Requested Pincode</label>
+            <input type="number" class="form-control" name="requested_pincode" id="requested_pincode"
+                aria-describedby="requested_pincode" placeholder="Requested Pincode"
+                formControlName="requested_pincode">
+            <small id="requested_pincode" class="form-text text-muted">Required</small>
+        </div>
+
+        <div class="form-group">
+            <label for="requested_date">Requested Date</label>
+            <input type="text" class="form-control" name="requested_date" id="requested_date"
+                aria-describedby="requested_date" placeholder="Requested Date" formControlName="requested_date"
+                bsDatepicker placement="top" autocomplete="off"
+                [bsConfig]="{ withTimepicker: true, adaptivePosition: false, rangeInputFormat : 'MMMM Do YYYY, h:mm a', dateInputFormat: 'MMMM Do YYYY, h:mm:ss a' }">
+            <small id="requested_date" class="form-text text-muted">Required</small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-sm"
+            (click)="bookEmitter.emit(null); requestEmitter.emit(null)">Close</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-sm">Submit</button>
+    </div>
+</form>

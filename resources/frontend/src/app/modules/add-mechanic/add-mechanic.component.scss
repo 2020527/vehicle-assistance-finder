@@ -1,3 +1,14 @@
 .fa-wrench {
     font-size: 80px;
 }
+.image-display {
+    width: 200px;
+    height: 200px;
+
+    img {
+        height: auto;
+        width: auto;
+        max-height: 100%;
+        max-width: 100%;
+    }
+}

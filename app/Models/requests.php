@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class requests extends Model
+class Requests extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'mechanic_id', 'requested_address', 'requested_pincode'];
+    protected $fillable = ['user_id', 'garage_id', 'requested_date', 'requested_address', 'requested_pincode', 'repair_for'];
 }

@@ -11,6 +11,8 @@ import { AddMechanicModule } from './modules/add-mechanic/add-mechanic.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApplicationService } from './services/application.service';
 import { JWTInterceptor } from './interceptors/http.interceptor';
+import { AlertModule } from '@full-fledged/alerts';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { JWTInterceptor } from './interceptors/http.interceptor';
     LoginModule,
     RegisterModule,
     FindMechanicModule,
-    AddMechanicModule
+    AddMechanicModule,
+    AlertModule.forRoot({maxMessages: 5, timeout: 3000, positionX: 'right', positionY: 'top'}),
+    NgxLoadingModule.forRoot({})
   ],
   providers: [
     ApplicationService,

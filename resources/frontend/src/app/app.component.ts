@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 import { environment } from 'src/environments/environment';
 import { ApplicationService } from './services/application.service';
+const PrimaryWhite = '#ffffff';
+const SecondaryGrey = '#ccc';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +14,20 @@ import { ApplicationService } from './services/application.service';
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
+  ngxLoadingComponent!: NgxLoadingComponent;
+  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
+  public loading = true;
+  public primaryColour = PrimaryWhite;
+  public secondaryColour = SecondaryGrey;
+  public coloursEnabled = false;
+  public loadingTemplate!: TemplateRef<any>;
+  public config = {
+    animationType: ngxLoadingAnimationTypes.none,
+    primaryColour: this.primaryColour,
+    secondaryColour: this.secondaryColour,
+    tertiaryColour: this.primaryColour,
+    backdropBorderRadius: '3px',
+  };
   public isAuthentication = false;
   public user: any;
 
@@ -25,7 +42,7 @@ export class AppComponent implements OnInit {
           this.router.navigate(['/login']);
         }
       }
-      if(ev instanceof NavigationEnd) {
+      if (ev instanceof NavigationEnd) {
         this.isAuthentication = this.router.url.indexOf('/register') > -1 || this.router.url.indexOf('/login') > -1;
       }
     });

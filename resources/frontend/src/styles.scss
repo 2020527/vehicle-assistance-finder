@@ -13,3 +13,11 @@
 .pointer {
     cursor: pointer;
 }
+
+.bs-rating-star {
+    font-size: 17px;
+
+    &.active {
+        color: green;
+    }
+}

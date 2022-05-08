@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from '@full-fledged/alerts';
 import { ApplicationService } from 'src/app/services/application.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -43,24 +45,29 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.applicationService.loading = true;
     this.loading = 'Please wait...';
     this.httpClient.post(`${environment.API}/user/register`, this.form.value)
       .subscribe((response: any) => {
         console.log(response);
 
+        this.applicationService.loading = false;
         this.loading = '';
         this.alert.type = 'success';
-        this.alert.msg = 'Successfully registered into the system!';
-        this.applicationService.setToken(response.token);
-        this.applicationService.currentUser$.next(response.data);
+        this.alert.msg = 'Successfully registered into the system! Please login to continue';
+        this.alertService.success(this.alert.msg);
+        // this.applicationService.setToken(response.token);
+        // this.applicationService.currentUser$.next(response.data);
         setTimeout(() => {
-          this.router.navigate(['/mechanics']);
+          this.router.navigate(['/login']);
         }, 2000);
       }, (error: any) => {
         console.error(error);
+        this.applicationService.loading = false;
         this.alert.msg = 'Something went wrong, please try again';
         this.alert.type = 'danger';
         this.loading = '';
+        this.alertService.danger(this.alert.msg);
       });
   }
 }

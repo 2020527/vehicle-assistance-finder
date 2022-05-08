@@ -1,6 +1,6 @@
 <div class="d-block mt-3">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf="!id">
             <div class="d-block mt-5">
 
                 <h1 class="text mb-4">
@@ -19,7 +19,7 @@
         <div class="col-lg-6">
             <div class="card bg-light mt-5">
                 <div class="card-body">
-                    <h5 class="mb-3">Add A Mechanic</h5>
+                    <h5 class="mb-3">{{ id ? 'Update' : 'Add A' }} Mechanic</h5>
                     <form [formGroup]="form" (submit)="submit()">
                         <div class="form-group">
                             <label for="title">Title</label>
@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label for="pincode">Pincode</label>
                             <input type="number" class="form-control" name="pincode" id="pincode"
-                                aria-describedby="pincode" placeholder="Pincode" formControlName="pinCode">
+                                aria-describedby="pincode" placeholder="Pincode" formControlName="pincode">
                             <small id="pincode" class="form-text text-muted">Required</small>
                         </div>
 
@@ -84,10 +84,18 @@
                                     aria-describedby="inputGroupFileAddon02">Choose
                                     file</label>
                             </div>
-
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="d-block" *ngIf="details?.image">
+                            <div class="d-flex image-display">
+                                <img [src]="imageUrl + (details?.image)" alt="">
+                            </div>
+                        </div>
+
+                        <div class="d-block mt-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" (click)="goBack()" class="btn btn-light ml-3">Cancel</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -95,15 +103,3 @@
 
     </div>
 </div>
-
-<ng-template #template>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left text-success">Mechanic Added Successfully</h4>
-        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-            <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        Mechanic Name: {{ response?.title }}
-    </div>
-</ng-template>

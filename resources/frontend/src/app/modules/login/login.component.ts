@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from '@full-fledged/alerts';
 import { ApplicationService } from 'src/app/services/application.service';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public applicationService: ApplicationService,
     private router: Router,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -36,18 +38,23 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.applicationService.loading = true;
     this.httpClient.post(`${environment.API}/user/login`, this.form.value)
       .subscribe((response: any) => {
         console.log(response);
         this.applicationService.currentUser$.next(response.user);
         this.applicationService.setToken(response.token);
+        this.alertService.success('Successfully loggedin!');
 
         this.router.navigate(['/mechanics']);
+        this.applicationService.loading = false;
       }, (error: any) => {
         console.error(error);
+        this.applicationService.loading = false;
         this.alert.msg = 'Invalid Email or Password, please try again!';
         this.alert.type = 'danger';
         this.loading = '';
+        this.alertService.danger('Invalid Email or Password, please try again!');
       });
   }
 }
