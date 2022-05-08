@@ -3,10 +3,11 @@
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-body">
-                    <form>
-                        <h5>Address Search</h5>
+                    <form [formGroup]="filterForm" (submit)="submit()">
+                        <h6>Address Search</h6>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="" id="">
+                            <input type="text" placeholder="Address" class="form-control" name="" id=""
+                                formControlName="address">
                         </div>
                         <button type="submit" class="btn btn-light">Search</button>
                     </form>
@@ -15,19 +16,34 @@
 
             <div class="card mt-3">
                 <div class="card-body">
-                    <form>
-                        <h5>Pin Code Search</h5>
+                    <form [formGroup]="filterForm" (submit)="submit()">
+                        <h6>Pin Code Search</h6>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="" id="">
+                            <input type="number" placeholder="Pin Code" class="form-control" name=""
+                                formControlName="pincode" id="">
+                        </div>
+                        <button type="submit" class="btn btn-light">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <form [formGroup]="filterForm" (submit)="submit()">
+                        <h6>Garage Name Search</h6>
+                        <div class="form-group">
+                            <input type="text" placeholder="Garage Name" class="form-control" name=""
+                                formControlName="garage" id="">
                         </div>
                         <button type="submit" class="btn btn-light">Search</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8" *ngIf="garages?.length; else NoGarages">
             <div class="d-block" *ngIf="!bookingDetails">
                 <h5>Mechanics/Garages</h5>
+                <p class="mt-0">Matched Results: {{ garages?.length }}</p>
                 <div class="card mb-3" *ngFor="let item of garages">
                     <div class="row no-gutters">
                         <div class="col-md-4 d-flex align-items-stretch">
@@ -101,6 +117,20 @@
 
         <div class="d-flex justify-content-end align-items-center mt-4">
             <button class="btn btn-danger btn-sm" (click)="confirmDelete()">Delete Anyway</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #NoGarages>
+    <div class="col-lg-8">
+        <h5>Mechanics/Garages</h5>
+        <p class="mt-0">Matched Results: {{ garages?.length }}</p>
+        <div class="d-block mt-4">
+            <h1 class="text-left">
+                <i class="fa fa-frown-o" aria-hidden="true"></i>
+            </h1>
+
+            <span class="">No Records Found...</span>
         </div>
     </div>
 </ng-template>

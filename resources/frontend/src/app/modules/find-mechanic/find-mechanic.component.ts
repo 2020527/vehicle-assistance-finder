@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AlertService } from '@full-fledged/alerts';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApplicationService } from 'src/app/services/application.service';
@@ -19,6 +20,12 @@ export class FindMechanicComponent implements OnInit {
   public deleteGarage: any;
   public user: any;
   public bookingDetails: any;
+  public filterForm = new FormGroup({
+    pincode: new FormControl(null),
+    address: new FormControl(null),
+    garage: new FormControl(null)
+  });
+
   constructor(
     public applicationService: ApplicationService,
     private httpClient: HttpClient,
@@ -32,10 +39,21 @@ export class FindMechanicComponent implements OnInit {
     this.getGarages();
   }
 
-  getGarages() {
+  submit() {
+    let httpParams = new HttpParams();
+    Object.keys(this.filterForm.value).forEach((key: string) => {
+      if (this.filterForm.value[key]) {
+        httpParams = httpParams.append(key, this.filterForm.value[key]);
+      }
+    });
+    this.getGarages(httpParams);
+  }
+
+  getGarages(params: HttpParams = new HttpParams()) {
     this.applicationService.loading = true;
     this.httpClient.get(
-      `${environment.API}/garages`
+      `${environment.API}/garages`,
+      { params }
     ).subscribe((response: any) => {
       console.log(response);
       setTimeout(() => {

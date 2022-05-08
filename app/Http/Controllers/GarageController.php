@@ -5,21 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Garage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 class GarageController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('garages')->get();
+        $pincode = (int) $request->pincode;
+        $garageName = Str::lower($request->garage);
+        $address = Str::lower($request->address);
+
+        $garages = Garage::query();
+
+        // return response(['pincode' => $pincode, 'garage' => $garageName, 'address' => $address], 200);
+
+        if ($request->pincode) {
+            $garages = $garages->where('pincode', 'LIKE', '%' . $pincode . '%');
+        }
+
+        if ($request->garage) {
+            $garages = $garages->where(DB::raw('lower(title)'), 'LIKE', '%' . $garageName . '%');
+        }
+
+        if ($request->address) {
+            $garages = $garages->where(DB::raw('lower(address)'), 'LIKE', '%' . $address . '%');
+        }
+
+        $data = $garages->get();
 
         return response($data, 200);
     }
 
-    public function show($id) {
-        $garage = Garage::where('id', $id) -> get() ->first();
+    public function show($id)
+    {
+        $garage = Garage::where('id', $id)->get()->first();
         if (!$garage) {
             return response(['data' => 'No Garage found with your ID'], 404);
         }
